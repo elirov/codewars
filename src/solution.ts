@@ -1,16 +1,38 @@
-export class G964 {
-    public static iterPi(epsilon: number): number[] {
-        let approx = 4;
-        let denom = 3;
-        let sign = -1;
-        let iter = 1;
-        while (Math.abs(approx - Math.PI) > epsilon) {
-            approx += sign * 4 / denom;
-            denom += 2;
-            sign *= -1;
-            
-            iter++;
-        }
-        return [iter, Number(approx.toFixed(10))];
+export function solution(roman: string): number {
+  const lookupDigit = (digit: string): number =>
+    digit == 'I'
+      ? 1
+      : digit == 'V'
+      ? 5
+      : digit == 'X'
+      ? 10
+      : digit == 'L'
+      ? 50
+      : digit == 'C'
+      ? 100
+      : digit == 'D'
+      ? 500
+      : digit == 'M'
+      ? 1000
+      : Number.NaN;
+
+  let sum = 0;
+  let lastRomanVal = 0;
+  let run = 0;
+  for (let i = 0; i < roman.length; i++) {
+    const romanVal = lookupDigit(roman[i]);
+    if (lastRomanVal > 0 && lastRomanVal != romanVal) {
+      if (romanVal > lastRomanVal) {
+        sum -= run;
+      } else {
+        sum += run;
+      }
+      run = romanVal;
+    } else {
+      run += romanVal;
     }
+    lastRomanVal = romanVal;
+  }
+  sum += run;
+  return Number(sum);
 }

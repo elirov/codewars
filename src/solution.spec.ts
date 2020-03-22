@@ -1,17 +1,12 @@
-import solution = require('./solution');
-import {assert} from "chai";
+import { solution } from './solution';
+import { assert } from 'chai';
 
-function testIt(eps : number, expected : number[]) {
-    assert.deepEqual(solution.G964.iterPi(eps), expected)
-}
-
-describe("Fixed Tests iterPi", function() {
-    it("Basic tests", function() {
-        testIt(0.1, [10, 3.0418396189]);
-        testIt(0.01,  [100, 3.1315929036]);
-        testIt(0.001,  [1000, 3.1405926538]);
-    });
+describe('solution', function () {
+  it('tests', () => {
+    assert.equal(solution('IV'), 4);
+    assert.equal(solution('XXI'), 21);
+    assert.equal(solution('I'), 1);
+    assert.equal(solution('MMVIII'), 2008);
+    assert.equal(solution('MDCLXVI'), 1666);
+  });
 });
-
-
-
